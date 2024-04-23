@@ -1,6 +1,6 @@
 <h1 align="center"><em>Tribolium castaneum</em> transcriptomics pipeline developed for Koch et al. manuscript "<em>Gene expression evolution is predictable and driven by indirect selection pressures</em>"</h1>
 <p align="center">
-<img src="">
+<img src="https://github.com/charlesrocabert/Koch-et-al-Gene-expression-evolution-is-predictable-and-driven-by-indirect-selection-pressures/assets/25666459/c67546e7-e749-430c-8500-6670355d8478">
 <br/>
 </p>
 
