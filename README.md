@@ -555,6 +555,16 @@ sg2 --> |"Download<br/>output files<br/>(5_DownloadGemmaFiles.py)"| sg3
 ## Analyses <a name="analyses"></a>
 Analysis pipelines are related to manuscripts under preparation and will be displayed and described here later.
 
+Koch et al. analysis is located in the folder `indirect_selection_analysis`, and is organized as following:
+
+      └── indirect_selection_analysis
+           ├── scripts: contains the analysis scripts
+                └── 1_BuildDatasets.R: build datasets based on the pipeline outputs
+                ├── 2_ShowStatistics.R: display some statistics about the data
+                └── 3_GenerateFigures.R: generate manuscript figures
+           ├── data: contains all the datasets generated during the analysis
+           └── plots: contains the generated figures for the manuscript
+
 ## Data <a name="data"></a>
 
       └── data
