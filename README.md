@@ -461,10 +461,7 @@ flowchart LR
 subgraph "local"
 direction LR
 A[("read<br/>counts")] --> B("1_CopyExpressionFiles.sh<br/>(local)")
-B --> C("2_ComputePlasticityResponse.R<br/>(local)")
-B --> D("3_ComputePhenotypicNoise.R<br/>(local)")
-C --> E[("Plastic response<br/>phenotypes")]
-D --> F[("V<sub>e</sub><br/>phenotypes")]
+B --> C[("Normalized<br/>gene expression")]
 G[("Fitness<br/>measurements")] --> H("4_ComputeRelativeFitness.R<br/>(local)")
 H --> I[("Relative<br/>fitnesses")]
 end
