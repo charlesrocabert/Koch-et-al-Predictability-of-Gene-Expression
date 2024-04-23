@@ -46,7 +46,7 @@ Second, download the `data` folder from [???] and include it to the repository. 
 
 # Overview
 
-[Koch et al. pipeline.pdf](https://github.com/charlesrocabert/Koch-et-al-Gene-expression-evolution-is-predictable-and-driven-by-indirect-selection-pressures/files/15080552/Koch.et.al.pipeline.pdf)
+![Koch et al  pipeline](https://github.com/charlesrocabert/Koch-et-al-Gene-expression-evolution-is-predictable-and-driven-by-indirect-selection-pressures/assets/25666459/6f404bcf-a244-4a11-8d76-cbb040095cdb)
 
 # Dependencies <a name="dependencies"></a>
 
