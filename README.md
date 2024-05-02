@@ -37,7 +37,7 @@ The pipeline was first designed to be deployed on the [CSC computing farm](https
 # Usage
 
 First, download the latest version of this repository on your local computer ([here](https://github.com/charlesrocabert/Koch-et-al-Gene-expression-evolution-is-predictable-and-driven-by-indirect-selection-pressures/archive/refs/heads/main.zip)).
-Second, download the `data` folder from [???] and include it to the repository. The repository must be organized as following:
+Second, download the `data.tar.gz` file from [https://doi.org/10.5281/zenodo.11080749](https://doi.org/10.5281/zenodo.11080749), uncompress it and include it to the repository. The repository must be organized as following:
 
       ├── scripts
       ├── analyses
