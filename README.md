@@ -46,7 +46,7 @@ Second, download the `data.tar.gz` file from [https://doi.org/10.5281/zenodo.110
 
 # Overview
 
-![Koch et al  pipeline](https://github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression/assets/25666459/6f404bcf-a244-4a11-8d76-cbb040095cdb)
+![bioinformatics_pipeline](https://github.com/user-attachments/assets/45ef7949-f119-43f8-8af4-13bce11c525c)
 
 # Dependencies <a name="dependencies"></a>
 
