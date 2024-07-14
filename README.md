@@ -1,6 +1,6 @@
 <h1 align="center"><em>Tribolium castaneum</em> transcriptomics pipeline developed for Koch et al. manuscript "<em>Gene expression evolution is predicted by selection, genetic covariances and network topology</em>"</h1>
 <p align="center">
-<img src="https://github.com/charlesrocabert/Koch-et-al-Gene-expression-evolution-is-predictable-and-driven-by-indirect-selection-pressures/assets/25666459/c67546e7-e749-430c-8500-6670355d8478">
+<img src="https://github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression/assets/25666459/c67546e7-e749-430c-8500-6670355d8478">
 <br/>
 </p>
 
@@ -36,7 +36,7 @@ The pipeline was first designed to be deployed on the [CSC computing farm](https
 
 # Usage
 
-First, download the latest version of this repository on your local computer ([here](https://github.com/charlesrocabert/Koch-et-al-Gene-expression-evolution-is-predictable-and-driven-by-indirect-selection-pressures/archive/refs/heads/main.zip)).
+First, download the latest version of this repository on your local computer ([here](https://github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression/archive/refs/heads/main.zip)).
 Second, download the `data.tar.gz` file from [https://doi.org/10.5281/zenodo.11080749](https://doi.org/10.5281/zenodo.11080749), uncompress it and include it to the repository. The repository must be organized as following:
 
       ├── scripts
@@ -46,7 +46,7 @@ Second, download the `data.tar.gz` file from [https://doi.org/10.5281/zenodo.110
 
 # Overview
 
-![Koch et al  pipeline](https://github.com/charlesrocabert/Koch-et-al-Gene-expression-evolution-is-predictable-and-driven-by-indirect-selection-pressures/assets/25666459/6f404bcf-a244-4a11-8d76-cbb040095cdb)
+![Koch et al  pipeline](https://github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression/assets/25666459/6f404bcf-a244-4a11-8d76-cbb040095cdb)
 
 # Dependencies <a name="dependencies"></a>
 
