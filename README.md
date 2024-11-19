@@ -1,4 +1,4 @@
-<h1 align="center"><em>Tribolium castaneum</em> transcriptomics pipeline developed for Koch et al. manuscript "<em>Gene expression evolution is predicted by selection, genetic covariances and network topology</em>"</h1>
+<h1 align="center"><em>Tribolium castaneum</em> transcriptomics pipeline developed for Koch et al. manuscript "<em>Gene expression evolution is predicted by stronger genetic selection at more pleiotropic genes</em>"</h1>
 <p align="center">
 <img src="https://github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression/assets/25666459/c67546e7-e749-430c-8500-6670355d8478">
 <br/>
