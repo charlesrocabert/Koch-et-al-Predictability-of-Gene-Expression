@@ -49,7 +49,8 @@ To re-run the pipeline, please follow the steps below:
 
 # Overview
 
-![bioinformatics_pipeline](https://github.com/user-attachments/assets/45ef7949-f119-43f8-8af4-13bce11c525c)
+![final_pipeline](https://github.com/user-attachments/assets/0c7933f0-b0de-4ac4-bef4-f3415fc46f95)
+
 
 # Dependencies <a name="dependencies"></a>
 
