@@ -51,7 +51,6 @@ To re-run the pipeline, please follow the steps below:
 
 ![final_pipeline](https://github.com/user-attachments/assets/0c7933f0-b0de-4ac4-bef4-f3415fc46f95)
 
-
 # Dependencies <a name="dependencies"></a>
 
 ### • Software:
