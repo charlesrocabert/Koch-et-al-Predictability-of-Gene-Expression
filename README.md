@@ -30,9 +30,9 @@ The pipeline was first designed to be deployed on the [CSC computing farm](https
 
 # Authors <a name="authors"></a>
 
-- Charles Rocabert
-- Eva L. Koch
-- Frédéric Guillaume
+- Charles Rocabert (https://orcid.org/0000-0002-9224-5819)
+- Eva L. Koch (https://orcid.org/0000-0001-8366-4897)
+- Frédéric Guillaume (https://orcid.org/0000-0003-0874-0081)
 
 # Usage
 
