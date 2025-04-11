@@ -36,11 +36,10 @@ gene_parallelism_vs_selection <- function( gene_dataset )
     annotate("text", label=paste0("n = ",count_summary$n), x=c(1,2,3), y=rep(3.5,3), size=3, vjust=2) +
     ylim(-6, 6.2) +
     xlab("") +
-    ylab("Total selection on gene expression\n(absolute log-scale)") +
+    ylab(TeX("Genetic selection - $|\\log_{10}|$")) +
     ggtitle("Gene AFC parallelism and selection") +
     labs(fill = "Parallelism:") +
-    theme_classic() +
-    theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+    theme_classic()
   ############
   return(p)
 }
@@ -86,12 +85,12 @@ eQTL_carrier_vs_selection <- function( gene_dataset )
     stat_compare_means(comparisons=comparisons, method="wilcox.test", label="p.signif") +
     annotate("text", label=paste0("n = ",count_summary$n), x=c(1,2,3), y=rep(3.5,3), size=3, vjust=2) +
     scale_fill_brewer(palette="PiYG", labels=c("Non-eQTL\ncarrier", "Single-phenotype\neQTL carrier", "Pleiotropic\neQTL carrier")) +
+    scale_x_discrete(labels=c("Non-eQTL\ncarrier", "Single-phenotype\neQTL carrier", "Pleiotropic\neQTL carrier")) +
     xlab("") +
-    ylab("Total selection on gene expression\n(absolute log-scale)") +
+    ylab(TeX("Genetic selection - $|\\log_{10}|$")) +
     ggtitle("eQTL carrier categories and selection") +
     labs(fill = "") +
-    theme_classic() +
-    theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+    theme_classic()
   ############
   return(p)
 }
@@ -233,14 +232,10 @@ ggsave("analyses/indirect_selection_analysis/plots/hub_genes_total_selection.pdf
 #------------------------------------------------#
 # 2) Build the main figure                       #
 #------------------------------------------------#
-p1     = eQTL_carrier_vs_selection(gene_dataset) + theme(legend.position="bottom")
-table(gene_dataset$Pleiotropy_category)
-p2     = eQTL_phenotype_vs_selection( gene_dataset ) + theme(legend.position="bottom")
-p3     = gene_parallelism_vs_selection(gene_dataset) + theme(legend.position="bottom")
-p_up   = plot_grid(p1, p2, ncol=2, labels=c("A", "B"))
-p_down = plot_grid(NULL, p3, NULL, ncol=3, labels=c("", "C", ""), rel_widths=c(0.25, 0.5, 0.25))
-p      = plot_grid(p_up, p_down, ncol=1)
-ggsave("analyses/indirect_selection_analysis/plots/genetic_markers_total_selection.pdf", p, width=9, height=9, units="in")
+p1 = gene_parallelism_vs_selection(gene_dataset) + theme(legend.position="none")
+p2 = eQTL_carrier_vs_selection(gene_dataset) + theme(legend.position="none")
+p  = plot_grid(p1, p2, labels="AUTO")
+ggsave("analyses/indirect_selection_analysis/plots/genetic_markers_total_selection.pdf", p, width=9, height=5, units="in")
 
 #------------------------------------------------#
 # 3) Make pleiotropy and connectivity histograms #
