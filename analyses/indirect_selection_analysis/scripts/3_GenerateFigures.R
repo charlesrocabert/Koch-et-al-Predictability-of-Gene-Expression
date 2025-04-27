@@ -224,29 +224,23 @@ eQTL_carrier_dataset   = readRDS("./analyses/indirect_selection_analysis/data/eQ
 eQTL_phenotype_dataset = readRDS("./analyses/indirect_selection_analysis/data/eQTL_phenotype_dataset.rds")
 
 #------------------------------------------------#
-# 3) Make hub gene figures                       #
-#------------------------------------------------#
-p = hub_gene_figures(gene_dataset)
-ggsave("analyses/indirect_selection_analysis/plots/hub_genes_total_selection.pdf", p, width=5, height=4, units="in")
-
-#------------------------------------------------#
 # 2) Build the main figure                       #
 #------------------------------------------------#
 p1 = gene_parallelism_vs_selection(gene_dataset) + theme(legend.position="none")
 p2 = eQTL_carrier_vs_selection(gene_dataset) + theme(legend.position="none")
 p  = plot_grid(p1, p2, labels="AUTO")
-ggsave("analyses/indirect_selection_analysis/plots/genetic_markers_total_selection.pdf", p, width=9, height=5, units="in")
+ggsave("./analyses/indirect_selection_analysis/plots/genetic_markers_total_selection.pdf", p, width=9, height=5, units="in")
 
 #------------------------------------------------#
 # 3) Make pleiotropy and connectivity histograms #
 #------------------------------------------------#
 figs = eQTL_histograms(eQTL_carrier_dataset, eQTL_phenotype_dataset)
-ggsave("analyses/indirect_selection_analysis/plots/pleiotropy_distribution.pdf", figs[["p1"]], width=5, height=4, units="in")
-ggsave("analyses/indirect_selection_analysis/plots/connectivity_distribution.pdf", figs[["p2"]], width=5, height=4, units="in")
+ggsave("./analyses/indirect_selection_analysis/plots/pleiotropy_distribution.pdf", figs[["p1"]], width=5, height=4, units="in")
+ggsave("./analyses/indirect_selection_analysis/plots/connectivity_distribution.pdf", figs[["p2"]], width=5, height=4, units="in")
 
 #------------------------------------------------#
-# 4) Make pairwise line shift similarity boxplot #
+# 4) Make hub gene figures                       #
 #------------------------------------------------#
-p = line_shift_similarity_figure(SNP_dataset)
-ggsave("analyses/indirect_selection_analysis/plots/line_shift_similarity.pdf", p, width=5.5, height=5.5, units="in")
+p = hub_gene_figures(gene_dataset)
+ggsave("./analyses/indirect_selection_analysis/plots/hub_genes_total_selection.pdf", p, width=5, height=4, units="in")
 
