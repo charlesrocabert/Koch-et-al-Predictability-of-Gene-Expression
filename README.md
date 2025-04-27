@@ -585,7 +585,7 @@ Koch et al. analysis is located in the folder `indirect_selection_analysis`, and
 
 # Copyright <a name="copyright"></a>
 
-Copyright © 2021-2024 Charles Rocabert, Eva L. Koch, Frédéric Guillaume. All rights reserved.
+Copyright © 2021-2025 Charles Rocabert, Eva L. Koch, Frédéric Guillaume. All rights reserved.
 
 # License <a name="license"></a>
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
