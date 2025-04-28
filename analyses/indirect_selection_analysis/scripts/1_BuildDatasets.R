@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 #***************************************************************************
-# Copyright © 2021-2024 Charles Rocabert, Frédéric Guillaume
+# Copyright © 2021-2025 Charles Rocabert, Frédéric Guillaume
 # Web: https://github.com/charlesrocabert/Tribolium-Polygenic-Adaptation
 #
 # 1_BuildDatasets.R
@@ -274,6 +274,28 @@ build_gene_dataset <- function( SNP_dataset, eQTLs )
   DATA$hub_gene_category[DATA$hub_gene_category=="1"] = "Hub gene"
   DATA$hub_gene_category = factor(DATA$hub_gene_category, levels=c("Other","Hub gene"))
   
+  ### Calculate gene length ###
+  DATA$gene_length = DATA$gene_end-DATA$gene_start
+  
+  ### Calculate SNP count ###
+  X                   = table(SNP_dataset$gene)
+  snp_count           = data.frame(names(X), as.vector(X))
+  names(snp_count)    = c("gene_id", "nb_SNPs")
+  rownames(snp_count) = snp_count$gene_id
+  DATA$nb_SNPs        = snp_count[DATA$gene, "nb_SNPs"]
+  rm(X)
+  rm(snp_count)
+  
+  ### Calculate average read count ###
+  de                  = read.table("./data/tribolium_counts/Tribolium_castaneum_ALL_Tcas3.30_read_counts.txt", h=T, sep="\t", check.names=F)
+  de                  = filter(de, gene_id %in% DATA$gene)
+  expr                = data.frame(de$gene_id, rowMeans(de[,-1]))
+  names(expr)         = c("gene_id", "expression")
+  rownames(expr)      = expr$gene_id
+  DATA$avg_read_count = expr[DATA$gene, "expression"]
+  rm(de)
+  rm(expr)
+  
   ### Return the dataset ###
   rownames(DATA) = DATA$gene
   return(DATA)
@@ -415,6 +437,29 @@ add_pleiotropy_connectivity <- function ( gene_dataset, eQTL_carrier_dataset, eQ
   return(gene_dataset)
 }
 
+### Build the LD decay dataset ###
+build_LD_decay_dataset <- function( window )
+{
+  path = "./data/tribolium_ld"
+  CHRs = c("ChLG2", "ChLG3", "ChLG4", "ChLG5", "ChLG6", "ChLG7", "ChLG8", "ChLG9", "ChLGX")
+  D    = data.frame()
+  for (chr in CHRs)
+  {
+    d      = read.table(paste0(path, "/", chr, ".ld"), h=T, check.names=F)
+    d$dist = abs(d$BP_A-d$BP_B)
+    d$chr  = rep(chr, dim(d)[1])
+    D      = rbind(D, d)
+  }
+  D$distc = cut(D$dist,breaks=seq(from=min(D$dist)-1,to=max(D$dist)+1,by=window))
+  Davg    = D %>% group_by(distc) %>% summarise(mean=mean(R2),median=median(R2))
+  Davg    = Davg %>% mutate(start=as.integer(str_extract(str_replace_all(distc,"[\\(\\)\\[\\]]",""),"^[0-9-e+.]+")),
+                            end=as.integer(str_extract(str_replace_all(distc,"[\\(\\)\\[\\]]",""),"[0-9-e+.]+$")),
+                            mid=start+((end-start)/2))
+  Davg = filter(Davg, !is.na(mid))
+  rm(D)
+  return(Davg)
+}
+
 
 ##################
 #      MAIN      #
@@ -433,6 +478,7 @@ gene_dataset           = build_gene_dataset(SNP_dataset, eQTLs)
 eQTL_dataset           = build_eQTL_dataset(SNP_dataset, gene_dataset, eQTLs)
 eQTL_carrier_dataset   = build_eQTL_carrier_dataset(eQTL_dataset, gene_dataset)
 eQTL_phenotype_dataset = build_eQTL_phenotype_dataset(SNP_dataset, gene_dataset, eQTLs)
+LD_decay_dataset       = build_LD_decay_dataset(1000)
 
 #----------------------------------------------#
 # 2) Complete the information                  #
@@ -446,6 +492,7 @@ saveRDS(SNP_dataset, "./analyses/indirect_selection_analysis/data/SNP_dataset.rd
 saveRDS(gene_dataset, "./analyses/indirect_selection_analysis/data/gene_dataset.rds")
 saveRDS(eQTL_phenotype_dataset, "./analyses/indirect_selection_analysis/data/eQTL_phenotype_dataset.rds")
 saveRDS(eQTL_carrier_dataset, "./analyses/indirect_selection_analysis/data/eQTL_carrier_dataset.rds")
+saveRDS(LD_decay_dataset, "./analyses/indirect_selection_analysis/data/LD_decay_dataset.rds")
 
 #----------------------------------------------#
 # 4) Save various gene lists for GO enrichment #

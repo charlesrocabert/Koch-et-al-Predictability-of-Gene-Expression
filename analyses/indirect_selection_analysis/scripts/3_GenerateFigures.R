@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 #***************************************************************************
-# Copyright © 2021-2024 Charles Rocabert, Frédéric Guillaume
+# Copyright © 2021-2025 Charles Rocabert, Frédéric Guillaume
 # Web: https://github.com/charlesrocabert/Tribolium-Polygenic-Adaptation
 #
 # 3_GenerateFigures.R
@@ -205,6 +205,60 @@ line_shift_similarity_figure <- function( SNP_dataset )
   return(p)
 }
 
+### Gene expression VS. number of SNPs per gene ###
+expression_vs_nbSNPs_figure <- function( gene_dataset )
+{
+  dl  = filter(gene_dataset, avg_read_count > 0)
+  reg = lm(log10(nb_SNPs/gene_length) ~ log10(avg_read_count), data=dl)
+  res = summary(reg)
+  p   = ggplot(dl, aes(x=avg_read_count, y=nb_SNPs/gene_length)) +
+    geom_point() +
+    geom_smooth() +
+    xlab("Average read counts") +
+    ylab("Number of SNPs (normalized by gene length)") +
+    ggtitle("Number of SNPs per gene VS. gene expression levels") +
+    scale_x_log10() + scale_y_log10() +
+    annotate("text", x=1e+5, y=1e-5, label=paste0("R² = ", round(res$r.squared, 3), "\np-value = ", round(res$coefficients[2,4], 3)), size=5) +
+    theme_classic()
+  return(p)
+}
+
+### LD decay with distance ###
+LD_decay_figure <- function( gene_dataset, LD_decay_dataset, window )
+{
+  LD_decay_dataset$distc = cut(LD_decay_dataset$dist,breaks=seq(from=min(LD_decay_dataset$dist)-1,to=max(LD_decay_dataset$dist)+1,by=window))
+  Davg  = LD_decay_dataset %>% group_by(distc) %>% summarise(mean=mean(R2),median=median(R2))
+  Davg  = Davg %>% mutate(start=as.integer(str_extract(str_replace_all(distc,"[\\(\\)\\[\\]]",""),"^[0-9-e+.]+")),
+                            end=as.integer(str_extract(str_replace_all(distc,"[\\(\\)\\[\\]]",""),"[0-9-e+.]+$")),
+                            mid=start+((end-start)/2))
+  Davg  = filter(Davg, !is.na(mid))
+  Gmean = mean(log10(gene_dataset$gene_length))
+  Gsdm  = mean(log10(gene_dataset$gene_length))-sd(log10(gene_dataset$gene_length))
+  Gsdp  = mean(log10(gene_dataset$gene_length))+sd(log10(gene_dataset$gene_length))
+  p1 = ggplot(Davg, aes(x=mid/1000000, y=mean)) +
+    geom_point() +
+    geom_line() +
+    geom_vline(aes(xintercept=10^Gmean/1000000, color="Average gene length"), linetype="dashed") +
+    geom_vline(aes(xintercept=10^Gsdm/1000000, color="Average +/- SD"), linetype="twodash") +
+    geom_vline(aes(xintercept=10^Gsdp/1000000, color="Average +/- SD"), linetype="twodash") +
+    xlab("Distance (Mb)") +
+    ylab("LD (r²)") +
+    ggtitle("LD decay with distance (in Mb)") +
+    scale_x_log10() + #scale_y_log10() +
+    scale_color_discrete(name = "Legend") +
+    theme_classic() +
+    theme(legend.position="bottom")
+  p2 = ggplot(gene_dataset, aes(x=(gene_length/1000000))) +
+    geom_histogram(binwidth=0.1) +
+    xlab("Gene length (Mb)") +
+    ylab("Number of genes") +
+    ggtitle("Gene length distribution") +
+    scale_x_log10() +
+    theme_classic()
+  p = plot_grid(p1, p2, ncol=2, labels="AUTO")
+  return(p)
+}
+
 
 ##################
 #      MAIN      #
@@ -222,6 +276,7 @@ gene_dataset           = readRDS("./analyses/indirect_selection_analysis/data/ge
 eQTL_dataset           = readRDS("./analyses/indirect_selection_analysis/data/eQTL_dataset.rds")
 eQTL_carrier_dataset   = readRDS("./analyses/indirect_selection_analysis/data/eQTL_carrier_dataset.rds")
 eQTL_phenotype_dataset = readRDS("./analyses/indirect_selection_analysis/data/eQTL_phenotype_dataset.rds")
+LD_decay_dataset       = readRDS("./analyses/indirect_selection_analysis/data/LD_decay_dataset.rds")
 
 #------------------------------------------------#
 # 2) Build the main figure                       #
@@ -243,4 +298,16 @@ ggsave("./analyses/indirect_selection_analysis/plots/connectivity_distribution.p
 #------------------------------------------------#
 p = hub_gene_figures(gene_dataset)
 ggsave("./analyses/indirect_selection_analysis/plots/hub_genes_total_selection.pdf", p, width=5, height=4, units="in")
+
+#------------------------------------------------#
+# 5) Make the expression VS. SNP number figure   #
+#------------------------------------------------#
+p = expression_vs_nbSNPs_figure(gene_dataset)
+ggsave("./analyses/indirect_selection_analysis/plots/expression_vs_nb_SNPs.pdf", p, width=8, height=4, units="in")
+
+#------------------------------------------------#
+# 6) Make the LD decay figure                    #
+#------------------------------------------------#
+p = LD_decay_figure(gene_dataset, LD_decay_dataset, 1000)
+ggsave("./analyses/indirect_selection_analysis/plots/LD_decay.pdf", p, width=9, height=4, units="in")
 
