@@ -40,7 +40,7 @@ To re-run the pipeline, please follow the steps below:
 
 **(1)** Download the latest version of this repository on your local computer ([here](https://github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression/archive/refs/heads/main.zip)),
 
-**(2)** Download the `data.tar.gz` file from [https://doi.org/10.5281/zenodo.11080749](https://doi.org/10.5281/zenodo.11080749), uncompress it and include it to the repository as following:
+**(2)** Download the `data.tar.gz` file from [https://doi.org/10.5281/zenodo.15291606](https://doi.org/10.5281/zenodo.15291606), uncompress it and include it to the repository as following:
 
       ├── scripts
       ├── analyses
