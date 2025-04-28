@@ -23,6 +23,7 @@ The pipeline was first designed to be deployed on the [CSC computing farm](https
     - [Preparing read counts](#scripts_6)
     - [Preparing phenotypes](#scripts_7)
     - [eQTLs](#scripts_8)
+    - [LD decay](#scripts_9)
   - [Analyses](#analyses)
   - [Data](#data)
 - [Copyright](#copyright)
@@ -54,6 +55,7 @@ To re-run the pipeline, please follow the steps below:
 # Dependencies <a name="dependencies"></a>
 
 ### • Software:
+- PLINK 1.9,
 - PLINK 2.0,
 - GATK-4.2.3.0,
 - samtools 1.14
@@ -104,7 +106,8 @@ The pipeline is splitted in three main folders:
            ├── 5_AFCs
            ├── 6_read_counts
            ├── 7_phenotypes
-           └── 8_eQTLs
+           ├── 8_eQTLs
+           └── 9_LD_decay
 
 Transcriptomics tasks are separated into folders and numbered for clarity.
 For each task, the scripts are also numbered in the order of their execution, and are split between local (`local` folder) and HPC (`hpc` folder).
@@ -498,7 +501,7 @@ Associated data folder(s): `./data/tribolium_eqtl`.
 > This script generates input files necessary to the GWAA with GEMMA software:
 > - `.bed` and `.bim` files using `plink2`,
 > - `.fam` and `.pheno` files using the script `EditFam.R`.
-> Files are generated at once for all the phenotypes (expression, plasticity, noise and fitness). 
+> Files are generated at once for all the phenotypes (expression and fitness). 
 
 #### ⚙️ `2_UploadGemmaFiles.py` (local):
 > This script exports all the input files (`.bed`, `.bim`, `.fam` and `.pheno`) to the distant storage server.
@@ -555,6 +558,30 @@ sg1 --> |"Upload<br/>input files<br/>(2_UploadGemmaFiles.py)"| sg2
 sg2 --> |"Download<br/>output files<br/>(5_DownloadGemmaFiles.py)"| sg3
 ```
 
+### 📂 LD decay <a name="scripts_9"></a>
+
+      └── scripts
+           └── 9_LD_decay
+                └── local
+                     └── 1_calculate_LD.sh
+
+This task runs PLINK1.9 to calculate pairwise linkage desequilibrium correlations per chromosome.
+
+Associated data folder(s): `./data/tribolium_ld`.
+
+#### ⚙️ `1_calculate_LD.sh` (local):
+> This script calculates pairwise LD per chromosome, based on the raw SNPs VCF file containing all individuals.
+> One LD output is generated per chromosome.
+
+```mermaid
+flowchart TB
+subgraph sg1["local (1)"]
+direction LR
+A[("VCF")] --> B("1_calculate_LD.sh<br/>(local)")
+B --> C[(".ld")]
+end
+```
+
 ## Analyses <a name="analyses"></a>
 Analysis pipelines are related to manuscripts under preparation and will be displayed and described here later.
 
@@ -578,6 +605,7 @@ Koch et al. analysis is located in the folder `indirect_selection_analysis`, and
            ├── tribolium_eqtl: contains significant eQTLs for all phenotypes
            ├── tribolium_filters: contains various VCF filters
            ├── tribolium_genome: contains annotated genomes
+           ├── tribolium_ld: contains linkage desequilibrium calculations per chromosome
            ├── tribolium_pedigree: contains pedigrees related to the family stucture of the population
            ├── tribolium_phenotypes: contains calculated phenotypes
            ├── tribolium_snp: contains VCF files containing bi-allelic variant SNPs
