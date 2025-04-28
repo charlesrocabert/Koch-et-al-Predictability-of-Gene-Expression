@@ -531,7 +531,7 @@ Associated data folder(s): `./data/tribolium_eqtl`.
 
 #### ⚙️ `6_merge_eQTLs_pipeline.sh (local):
 > This pipeline collect and merge significant eQTLs with additional information such as gene position (`ExtractGenePos.py` script) and gene and phenotype annotations (`MergeEQTLsDatasets.R` script).
-> All phenotypes (expression, plasticity, noise and fitness) are treated at once.
+> All phenotypes (expression and fitness) are treated at once.
 > This script also calculates the correlation to fitness of every phenotypes (`ComputeCorrelationToFitness.R` script).
 
 ```mermaid
