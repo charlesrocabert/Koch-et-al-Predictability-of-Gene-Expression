@@ -214,11 +214,11 @@ expression_vs_nbSNPs_figure <- function( gene_dataset )
   p   = ggplot(dl, aes(x=avg_read_count, y=nb_SNPs/gene_length)) +
     geom_point() +
     geom_smooth() +
-    xlab("Average read counts") +
-    ylab("Number of SNPs (normalized by gene length)") +
-    ggtitle("Number of SNPs per gene VS. gene expression levels") +
+    xlab("Average read count") +
+    ylab("Number of SNPs\n(normalized by gene length)") +
+    ggtitle("Number of SNPs per gene VS. average read count") +
     scale_x_log10() + scale_y_log10() +
-    annotate("text", x=1e+5, y=1e-5, label=paste0("R² = ", round(res$r.squared, 3), "\np-value = ", round(res$coefficients[2,4], 3)), size=5) +
+    annotate("text", x=1e+5, y=1e-5, label=paste0("R² = ", round(res$r.squared, 3)), size=5) +
     theme_classic()
   return(p)
 }
@@ -308,6 +308,6 @@ ggsave("./analyses/indirect_selection_analysis/plots/expression_vs_nb_SNPs.pdf",
 #------------------------------------------------#
 # 6) Make the LD decay figure                    #
 #------------------------------------------------#
-p = LD_decay_figure(gene_dataset, LD_decay_dataset, 1000)
+p = LD_decay_figure(gene_dataset, LD_decay_dataset, 1500)
 ggsave("./analyses/indirect_selection_analysis/plots/LD_decay.pdf", p, width=9, height=4, units="in")
 
