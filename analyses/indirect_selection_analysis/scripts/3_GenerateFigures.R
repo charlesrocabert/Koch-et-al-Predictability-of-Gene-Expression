@@ -259,6 +259,51 @@ LD_decay_figure <- function( gene_dataset, LD_decay_dataset, window )
   return(p)
 }
 
+### Plot the number of SNPs in hub genes vs. other genes ###
+hub_nb_SNPs_figure <- function( gene_dataset )
+{
+  gene_dataset$hub_category = as.character(gene_dataset$hub_gene)
+  gene_dataset$hub_category[gene_dataset$hub_category=="0"] = "Other"
+  gene_dataset$hub_category[gene_dataset$hub_category=="1"] = "Hub gene"
+  gene_dataset$hub_category = factor(gene_dataset$hub_category, levels=c("Other","Hub gene"))
+  comparisons = list(c("Other","Hub gene"))
+  count_summary = gene_dataset %>% group_by(hub_category) %>% tally()
+  p1 = ggplot(gene_dataset, aes(as.factor(hub_category), log10(nb_SNPs), fill=as.factor(hub_category))) +
+    geom_boxplot() +
+    scale_fill_brewer(palette="BrBG") +
+    stat_compare_means(comparisons=comparisons, method="wilcox.test", label="p.signif") +
+    annotate("text", label=paste0("n = ",count_summary$n), x=c(1,2), y=rep(0.2,2), size=4, vjust=2) +
+    #ylim(-6, 6.2) +
+    xlab("") +
+    ylab(TeX("Number of SNPs - $|\\log_{10}|$")) +
+    ggtitle("Number of SNPs in hub or other genes") +
+    labs(fill = "Gene category:") +
+    theme_classic()
+  p2 = ggplot(gene_dataset, aes(as.factor(hub_category), log10(gene_length), fill=as.factor(hub_category))) +
+    geom_boxplot() +
+    scale_fill_brewer(palette="BrBG") +
+    stat_compare_means(comparisons=comparisons, method="wilcox.test", label="p.signif") +
+    annotate("text", label=paste0("n = ",count_summary$n), x=c(1,2), y=rep(0.2,2), size=4, vjust=2) +
+    #ylim(-6, 6.2) +
+    xlab("") +
+    ylab(TeX("Gene length - $|\\log_{10}|$")) +
+    ggtitle("Number of SNPs in hub or other genes") +
+    labs(fill = "Gene category:") +
+    theme_classic()
+  p3 = ggplot(gene_dataset, aes(as.factor(hub_category), log10(nb_SNPs/gene_length), fill=as.factor(hub_category))) +
+    geom_boxplot() +
+    scale_fill_brewer(palette="BrBG") +
+    stat_compare_means(comparisons=comparisons, method="wilcox.test", label="p.signif") +
+    annotate("text", label=paste0("n = ",count_summary$n), x=c(1,2), y=rep(0.5,2), size=4, vjust=2) +
+    #ylim(-6, 6.2) +
+    xlab("") +
+    ylab(TeX("Number of SNPs (normalized by gene length) - $|\\log_{10}|$")) +
+    ggtitle("Number of SNPs in hub or other genes") +
+    labs(fill = "Gene category:") +
+    theme_classic()
+  return(list("p1"=p1, "p2"=p2, "p3"=p3))
+}
+
 
 ##################
 #      MAIN      #
@@ -310,4 +355,10 @@ ggsave("./analyses/indirect_selection_analysis/plots/expression_vs_nb_SNPs.pdf",
 #------------------------------------------------#
 p = LD_decay_figure(gene_dataset, LD_decay_dataset, 1500)
 ggsave("./analyses/indirect_selection_analysis/plots/LD_decay.pdf", p, width=9, height=4, units="in")
+
+#------------------------------------------------#
+# 7) Make nb SNPs in hub genes figures           #
+#------------------------------------------------#
+figs = hub_nb_SNPs_figure(gene_dataset)
+ggsave("./analyses/indirect_selection_analysis/plots/hub_genes_nb_SNPs.pdf", figs[["p3"]], width=5, height=4, units="in")
 
