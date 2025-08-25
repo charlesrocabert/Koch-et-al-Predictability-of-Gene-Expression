@@ -583,7 +583,6 @@ end
 ```
 
 ## Analyses <a name="analyses"></a>
-Analysis pipelines are related to manuscripts under preparation and will be displayed and described here later.
 
 Koch et al. analysis is located in the folder `indirect_selection_analysis`, and is organized as following:
 
