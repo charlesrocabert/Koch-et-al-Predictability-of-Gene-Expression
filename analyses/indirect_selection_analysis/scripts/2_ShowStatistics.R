@@ -1,15 +1,14 @@
 #!/usr/bin/env Rscript
 
-#***************************************************************************
-# Copyright © 2021-2024 Charles Rocabert, Frédéric Guillaume
-# Web: https://github.com/charlesrocabert/Tribolium-Polygenic-Adaptation
+#*******************************************************************************
+# Copyright © 2021-2025 Charles Rocabert, Frédéric Guillaume
+# Web: github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression
 #
 # 2_ShowStatistics.R
 # ------------------
-# Display some statistics for the manuscript (including Chi2 and
-# permutation tests).
+# Display some statistics for the manuscript.
 # (LOCAL SCRIPT)
-#***************************************************************************
+#*******************************************************************************
 
 library("tidyverse")
 library("rstudioapi")

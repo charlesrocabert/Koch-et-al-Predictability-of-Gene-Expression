@@ -1,14 +1,14 @@
 #!/usr/bin/env Rscript
 
-#***************************************************************************
+#*******************************************************************************
 # Copyright © 2021-2025 Charles Rocabert, Frédéric Guillaume
-# Web: https://github.com/charlesrocabert/Tribolium-Polygenic-Adaptation
+# Web: github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression
 #
 # 3_GenerateFigures.R
 # -------------------
 # Generate all figures associated to the manuscript.
 # (LOCAL SCRIPT)
-#***************************************************************************
+#*******************************************************************************
 
 library("tidyverse")
 library("cowplot")
@@ -361,4 +361,33 @@ ggsave("./analyses/indirect_selection_analysis/plots/LD_decay.pdf", p, width=9, 
 #------------------------------------------------#
 figs = hub_nb_SNPs_figure(gene_dataset)
 ggsave("./analyses/indirect_selection_analysis/plots/hub_genes_nb_SNPs.pdf", figs[["p3"]], width=5, height=4, units="in")
+
+# x = gene_dataset$nb_SNPs
+# y = c()
+# for(elmt in x)
+# {
+#   parallel = c()
+#   for(i in seq(1, elmt))
+#   {
+#     res      = rbinom(7, 1, 0.025)
+#     parallel = c(parallel, sum(res))
+#   }
+#   y   = c(y, max(parallel))
+# }
+# sim_data        = data.frame(x, y)
+# names(sim_data) = c("nb_SNPs", "Parallelism")
+# sim_data$source = rep("Simulation", nrow(sim_data))
+# D = data.frame(gene_dataset$nb_SNPs, gene_dataset$Parallelism)
+# names(D) = c("nb_SNPs", "Parallelism")
+# D$source = rep("Experimental", nrow(D))
+# D = rbind(D, sim_data)
+# ggplot(D, aes(as.factor(Parallelism), nb_SNPs, fill=source)) +
+#   geom_boxplot() +
+#   scale_y_log10()
+# 
+# X = as.vector(table(gene_dataset$Parallelism))
+# Y = as.vector(table(sim_data$Parallelism))
+# 
+# plot(X, type="l", ylim=range(c(X,Y)))
+# lines(Y)
 

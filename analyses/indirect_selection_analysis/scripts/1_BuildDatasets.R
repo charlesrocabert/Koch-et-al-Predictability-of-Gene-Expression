@@ -1,14 +1,14 @@
 #!/usr/bin/env Rscript
 
-#***************************************************************************
+#*******************************************************************************
 # Copyright © 2021-2025 Charles Rocabert, Frédéric Guillaume
-# Web: https://github.com/charlesrocabert/Tribolium-Polygenic-Adaptation
+# Web: github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression
 #
 # 1_BuildDatasets.R
 # -----------------
 # Build SNP, gene and eQTL datasets prior to analyses.
 # (LOCAL SCRIPT)
-#***************************************************************************
+#*******************************************************************************
 
 library("tidyverse")
 library('rstudioapi')
@@ -490,6 +490,7 @@ gene_dataset = add_pleiotropy_connectivity(gene_dataset, eQTL_carrier_dataset, e
 #----------------------------------------------#
 saveRDS(SNP_dataset, "./analyses/indirect_selection_analysis/data/SNP_dataset.rds")
 saveRDS(gene_dataset, "./analyses/indirect_selection_analysis/data/gene_dataset.rds")
+saveRDS(eQTL_dataset, "./analyses/indirect_selection_analysis/data/eQTL_dataset.rds")
 saveRDS(eQTL_phenotype_dataset, "./analyses/indirect_selection_analysis/data/eQTL_phenotype_dataset.rds")
 saveRDS(eQTL_carrier_dataset, "./analyses/indirect_selection_analysis/data/eQTL_carrier_dataset.rds")
 saveRDS(LD_decay_dataset, "./analyses/indirect_selection_analysis/data/LD_decay_dataset.rds")
