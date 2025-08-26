@@ -4,6 +4,11 @@
 # Copyright © 2021-2025 Charles Rocabert, Frédéric Guillaume
 # Web: github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression
 #
+# 1_BuildDatasets.R
+# -----------------
+# Build SNP, gene and eQTL datasets prior to analyses.
+# (LOCAL SCRIPT)
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
