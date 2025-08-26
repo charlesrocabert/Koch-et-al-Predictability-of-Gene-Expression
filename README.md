@@ -4,11 +4,17 @@
 <br/>
 </p>
 
+<p align="justify">
 This repository contains the complete transcriptomics pipeline, as well as post-analysis scripts, developed for the manuscript <strong><em>Gene expression evolution is predicted by stronger indirect selection at more pleiotropic genes</em></strong> (https://doi.org/10.1101/2024.07.22.604294). The pipeline addresses various facets of the transcriptomics data obtained from the _Tribolium castaneum_ laboratory adaptive experiment published in [Koch & Guillaume (2020a)](https://doi.org/10.1371/journal.pgen.1008768), [Koch & Guillaume (2020b)](https://doi.org/10.1111/mec.15607) and [Koch et al. (2020)](https://doi.org/10.1111/evo.14119).
+</p>
 
+<p align="justify">
 The pipeline was first designed to be deployed on the [CSC computing farm](https://www.csc.fi/en/). **For this reason, parts of the code have been anonymized** (<em>e.g.</em> to connect to the CSC servers).
+</p>
 
+<p align="justify">
 (<strong>💡 Tip:</strong> if mermaid flowcharts do not display, please refresh the webpage).
+</p>
 
 # Table of contents
 - [Authors](#authors)
