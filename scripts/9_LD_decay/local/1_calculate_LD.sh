@@ -1,15 +1,28 @@
 #!/bin/bash
 # coding: utf-8
 
-#***************************************************************************
+#*******************************************************************************
 # Copyright © 2021-2025 Charles Rocabert, Frédéric Guillaume
-# Web: https://github.com/charlesrocabert/Tribolium-Polygenic-Adaptation
+# Web: github.com/charlesrocabert/Koch-et-al-Predictability-of-Gene-Expression
 #
 # 1_calculate_LD.sh
 # -----------------
 # Calculate pairwise LD (r2) for each chromosome.
 # (LOCAL SCRIPT)
-#***************************************************************************
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#*******************************************************************************
 
 
 cd /Users/charlesrocabert/git/charlesrocabert/Tribolium-Polygenic-Adaptation/

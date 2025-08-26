@@ -3,5 +3,3 @@
 *.DS_Store
 clean_folders.sh
 
-analyses/indirect_selection_analysis/data/Tribolium_castaneum_HD_G1_Tcas3.30_EXPRESSION.txt
-analyses/indirect_selection_analysis/scripts/4_tests.R
