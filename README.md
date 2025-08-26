@@ -8,6 +8,8 @@ This repository contains the complete transcriptomics pipeline, as well as post-
 
 The pipeline was first designed to be deployed on the [CSC computing farm](https://www.csc.fi/en/). **For this reason, parts of the code have been anonymized** (<em>e.g.</em> to connect to the CSC servers).
 
+(<strong>💡 Tip:</strong> if mermaid flowcharts do not display, please refresh the webpage).
+
 # Table of contents
 - [Authors](#authors)
 - [Usage](#usage)
